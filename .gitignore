@@ -1,0 +1,48 @@
+# Arquivos de sistema
+.DS_Store
+Thumbs.db
+
+# Ambientes virtuais
+venv/
+env/
+*.env
+
+# Arquivos de compilação
+*.pyc
+*.pyo
+__pycache__/
+
+# Logs e saída de teste
+*.log
+*.pot
+*.pyc
+__pycache__/
+htmlcov/
+.coverage
+dist/
+build/
+
+# Configuração do IDE
+.idea/
+
+# Dependências
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.db
+*.sqlite3
+*.h5
+*.hdf5
+*.log
+*.logs
+*.log.*
+*.csv
+*.xlsx
+*.xls
+
+# Ambiente Jupyter
+.ipynb_checkpoints/
+
+# Documentação
+docs/_build/
