@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+    <title>Sua Página</title>
+</head>
+
+<body>
+
+    <div class="navbar">
+        <a href="{{ url_for('register') }}" class="nav-btn">Register</a>
+        <a href="{{ url_for('login') }}" class="nav-btn">Login</a>
+
+
+    </div>
+
+    <div class="centered-text">
+        <p>KINGS OF THE WARRIORS.</p>
+        <img src="../static/img/img_gamer.jpg" alt="Descrição da Imagem">
+    </div>
+
+    <!-- O restante do conteúdo da sua página vai aqui -->
+
+</body>
+</html>

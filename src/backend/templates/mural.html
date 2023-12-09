@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='mural.css') }}">
+    <title>Twitter Feed</title>
+</head>
+<body>
+
+    <div class="content">
+        <div class="search-bar">
+            <input type="text" placeholder="Search">
+            <button class="search-btn"><i class="fas fa-search"></i></button>
+        </div>
+
+        <div class="side-menu">
+            <ul>
+                <li>Home</li>
+                <li>Explore</li>
+                <li>Notifications</li>
+                <li>Messages</li>
+            </ul>
+        </div>
+
+        <div class="container">
+            <div class="post-box">
+                <textarea placeholder="What's happening?"></textarea>
+                <button class="post-btn">Publicar</button>
+            </div>
+
+            <div class="tweet">
+                <div class="user-avatar"></div>
+                <div class="tweet-content">
+                    <div class="user-info">
+                        <span class="username">John Doe</span>
+                        <span class="handle">@johndoe</span>
+                    </div>
+                    <p class="tweet-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin bibendum est et hendrerit auctor.</p>
+                    <div class="tweet-actions">
+                        <button class="action-btn">Like</button>
+                        <button class="action-btn">Retweet</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Adicione mais tweets conforme necessário -->
+
+        </div>
+    </div>
+
+</body>
+</html>
