@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/games.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
+    <title>Detalhes do Jogo</title>
+</head>
+
+<body>
+    <h1 class="text-center">Detalhes do Jogo</h1>
+
+    {% if game_data %}
+    <div class="game-details">
+        <img src="{{ game_data.background_image }}" alt="{{ game_data.name }} background">
+        <h2>{{ game_data.name }}</h2>
+        <p>Sobre o jogo: {{ game_data.description_raw }}</p>
+
+        <div class="comments-container">
+            <h3>Comentários:</h3>
+            <ul>
+                {% for comment in comments %}
+                <li>
+                    <p class="comment-text">{{ comment.comment }}</p>
+                    <p class="comment-rating">Rating: {{ comment.rating }} {% if comment.rating > 3 %}
+                        <span class="positive-emoji">😊</span> {% elif comment.rating == 3 %}
+                        <span class="neutral-emoji">😐</span> {% else %}
+                        <span class="negative-emoji">😢</span> {% endif %}
+                    </p>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <form id="commentForm" action="/save_comment_and_rating" method="post">
+            <input type="hidden" id="gameSlug" name="gameSlug" value="{{ game_data.slug }}">
+            <label for="comment">Comentário:</label>
+            <textarea id="comment" name="comment" rows="4" cols="50"></textarea>
+        
+            <div id="gameRating" class="rating"></div>
+        
+            <input type="hidden" id="gameRatingValue" name="rating" value="0">
+        
+            <button type="submit" class="btn btn-primary">Enviar</button>
+            <button id="backButton" onclick="window.location.href='/mural'" type="button" style="background-color: #dc3545; color: #fff;">Voltar</button>
+        </form>
+    </div>
+    {% else %}
+    <p class="text-center">Nenhum jogo selecionado.</p>
+    {% endif %}
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async function () {
+            var gameSlug = '{{ game_slug }}';
+
+            if (gameSlug) {
+                try {
+                    const response = await fetch(`/get_game_data_by_slug/${gameSlug}`);
+                    if (!response.ok) {
+                        throw new Error(`Erro ao obter dados do jogo. Código de status: ${response.status}`);
+                    }
+
+                    const gameData = await response.json();
+
+                    document.querySelector('.game-details img').src = gameData.background_image;
+                    document.querySelector('.game-details h2').textContent = gameData.name;
+                    document.querySelector('.game-details p').textContent = `Sobre o jogo: ${gameData.description_raw}`;
+
+                } catch (error) {
+                    console.error('Erro ao obter dados do jogo:', error);
+                    console.error('Detalhes do erro:', error.message);
+                    alert('Erro ao obter dados do jogo. Consulte o console para obter mais detalhes.');
+                }
+            }
+        });
+
+        $(document).ready(function () {
+            $("#gameRating").rateYo({
+                rating: 0,
+                fullStar: true,
+                numStars: 5,
+                onChange: function (rating, rateYoInstance) {
+                    $("#gameRatingValue").val(rating);
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

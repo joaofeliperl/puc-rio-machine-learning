@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/ratings.css') }}">
+
+    <title>Ranking de Jogos</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-dark bg-dark fixed-top">
+        <a class="navbar-brand"></a>
+    </nav>
+
+    <div class="side-menu">
+        <ul class="nav flex-column">
+            <li class="nav-item"><a class="nav-link" href="{{ url_for('mural') }}">Buscar por jogos</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{ url_for('login') }}">Sign out</a></li>
+        </ul>
+
+    </div>
+    <h1 class="text-center mb-4">Ranking de Jogos</h1>
+
+    <div class="container centralize-cards">
+        <div class="row justify-content-center">
+            {% for game in game_ranking %}
+            <div class="col-md-4 mb-4">
+                <div class="card card-container">
+                    <div class="card-body">
+                        <h5 class="card-title">Posição {{ loop.index }}</h5>
+                        <p class="card-text">Jogo: {{ game.slug }}</p>
+                        <p class="card-text">Frequência: {{ game.frequency }}</p>
+                        <p class="card-text">Média de Avaliação: {{ game.average_rating | round(2) }}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+</body>
+
+</html>

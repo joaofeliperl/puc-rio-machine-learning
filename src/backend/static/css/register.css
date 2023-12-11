@@ -1,0 +1,77 @@
+body, html {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    background-image: url('../static/img/img_gamer.jpg');
+    background-size: cover;
+    background-position: center;
+    color: white; /* Define a cor do texto para branco */
+}
+
+
+.centered-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.centered-text h2 {
+    font-size: 28px;
+    color: white; /* Define a cor do texto para branco */
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.login-container {
+    width: 300px;
+    margin: 0 auto;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.5); /* Adiciona um fundo semitransparente para melhor legibilidade */
+    padding: 20px;
+    border-radius: 10px; /* Borda arredondada para o contêiner do formulário */
+}
+
+.login-container label {
+    display: block;
+    margin-bottom: 8px;
+    color: white; /* Define a cor do texto para branco */
+    text-align: left;
+}
+
+.login-container input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 16px;
+    box-sizing: border-box;
+    border: none;
+    border-radius: 5px; /* Adiciona bordas arredondadas */
+}
+
+.login-btn {
+    background-color: #c414f0;
+    color: white;
+    border: none;
+    padding: 15px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.login-btn:hover {
+    background-color: #910ec5;
+}
+
+p {
+    color: white; /* Define a cor do texto para branco */
+}
+
+a {
+    color: rgb(255, 0, 212);
+}
