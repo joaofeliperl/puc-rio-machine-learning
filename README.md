@@ -22,7 +22,7 @@ Este é o repositório do projeto **puc-rio-machine-learning**, uma aplicação 
 
 ## Uso
 
-1. Execute o aplicativo Flask: `python app.py`
+1. Execute o aplicativo Flask: `python src/backend/app.py`
 2. Abra o navegador e acesse `http://localhost:5000`
 
 ## Funcionalidades
