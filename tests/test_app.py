@@ -1,3 +1,4 @@
+
 import os
 import re
 import sys
@@ -70,6 +71,58 @@ def test_model_performance(client):
 
     # Verifica se a acurácia atende ao threshold
     accuracy_threshold = 0.8
-    # Define manualmente a acurácia para 0.8 (ou qualquer valor desejado)
-    accuracy = 0.8
+    
     assert accuracy >= accuracy_threshold, f"Model accuracy ({accuracy}) abaixo do threshold ({accuracy_threshold})"
+
+    # ... (código anterior)
+
+# ... (código anterior)
+
+# Função de teste para verificar se o modelo atende aos requisitos de desempenho para frases positivas
+def test_model_performance_positive(client):
+    # Dados de teste para frases positivas
+    test_comments = ["This is a positive comment.", "I love this product!"]
+    true_labels = [1, 1]  # 1 para positivo
+
+    # Pré-processa e vetoriza os dados
+    data_vectorized = vectorizer.transform([preprocess_text(comment) for comment in test_comments])
+
+    # Faz as predições usando o modelo
+    predictions_prob = model.predict_proba(data_vectorized)
+    predictions = model.classes_[np.argmax(predictions_prob, axis=1)]
+
+    # Use LabelEncoder para converter as classes para inteiros
+    label_encoder = LabelEncoder()
+    predictions_binary = label_encoder.fit_transform(predictions)
+
+    # Threshold de acurácia (substitua por threshold real)
+    accuracy = np.mean(predictions_binary == true_labels)
+
+    # Verifica se a acurácia atende ao threshold
+    accuracy_threshold = 0.8
+    assert accuracy >= accuracy_threshold, f"Model accuracy ({accuracy}) abaixo do threshold ({accuracy_threshold}) para frases positivas"
+
+
+# Função de teste para verificar se o modelo atende aos requisitos de desempenho para frases negativas
+def test_model_performance_negative(client):
+    # Dados de teste para frases negativas
+    test_comments = ["This is a negative comment.", "I do not like this product."]
+    true_labels = [0, 0]  # 0 para negativo
+
+    # Pré-processa e vetoriza os dados
+    data_vectorized = vectorizer.transform([preprocess_text(comment) for comment in test_comments])
+
+    # Faz as predições usando o modelo
+    predictions_prob = model.predict_proba(data_vectorized)
+    predictions = model.classes_[np.argmax(predictions_prob, axis=1)]
+
+    # Use LabelEncoder para converter as classes para inteiros
+    label_encoder = LabelEncoder()
+    predictions_binary = label_encoder.fit_transform(predictions)
+
+    # Threshold de acurácia (substitua por threshold real)
+    accuracy = np.mean(predictions_binary == true_labels)
+
+    # Verifica se a acurácia atende ao threshold
+    accuracy_threshold = 0.8
+    assert accuracy >= accuracy_threshold, f"Model accuracy ({accuracy}) abaixo do threshold ({accuracy_threshold}) para frases negativas"
