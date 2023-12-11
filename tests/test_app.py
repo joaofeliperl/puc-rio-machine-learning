@@ -1,7 +1,4 @@
-
-import os
 import re
-import sys
 import pytest
 import nltk
 from backend.app import app, load_model
@@ -39,32 +36,16 @@ def test_model_performance(client):
     test_comments = ["This is a positive comment.", "This is a negative comment."]
     true_labels = [1, 0]  # 1 para positivo, 0 para negativo
 
-    # Adicione mais impressões para diagnóstico
-    print("Comentários de teste:", test_comments)
-    print("Rótulos reais:", true_labels)
-
     # Pré-processa e vetoriza os dados
     data_vectorized = vectorizer.transform([preprocess_text(comment) for comment in test_comments])
-
-    # Adicione impressões para diagnóstico
-    print("Dimensões dos Vetores de Treino:", data_vectorized.shape)
-    print("Modelo:", model)
-    print("Vetorizador:", vectorizer)
 
     # Faz as predições usando o modelo
     predictions_prob = model.predict_proba(data_vectorized)
     predictions = model.classes_[np.argmax(predictions_prob, axis=1)]
 
-    # Adicione verificação de dados de teste
-    print("Test Labels:", true_labels)
-    print("Predictions (antes da conversão):", predictions)
-
     # Use LabelEncoder para converter as classes para inteiros
     label_encoder = LabelEncoder()
     predictions_binary = label_encoder.fit_transform(predictions)
-
-    # Adicione mais informações de diagnóstico
-    print("Predictions (após conversão):", predictions_binary)
 
     # Threshold de acurácia (substitua por threshold real)
     accuracy = np.mean(predictions_binary == true_labels)
@@ -73,10 +54,6 @@ def test_model_performance(client):
     accuracy_threshold = 0.8
     
     assert accuracy >= accuracy_threshold, f"Model accuracy ({accuracy}) abaixo do threshold ({accuracy_threshold})"
-
-    # ... (código anterior)
-
-# ... (código anterior)
 
 # Função de teste para verificar se o modelo atende aos requisitos de desempenho para frases positivas
 def test_model_performance_positive(client):
